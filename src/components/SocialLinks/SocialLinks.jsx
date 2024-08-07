@@ -86,12 +86,12 @@ const SocialLinks = () => {
               </svg>{" "}
               Email:
               <a
-                href="mailto:shubham.ruvasiya@gmail.com"
+                href="mailto:shubham.ruwasia@gmail.com"
                 target="_blank"
                 rel="noreferrer"
                 class="flex justify-start py-2 px-1 items-center"
               >
-                shubham.ruvasiya@gmail.com{" "}
+                shubham.ruwasia@gmail.com{" "}
               </a>
             </div>
           </div>

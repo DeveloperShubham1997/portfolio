@@ -27,8 +27,9 @@ const Home = () => {
                 backgroundColor: "#F6F5F2",
               }}
             >
-              <h3 className="mb-4"> Projects</h3>
-              <Projects />
+              <h3 className="mb-4"> Experience</h3>
+              <Experience />
+              
             </div>
             <div
               className="container flex-grow-1 p-3 mb-3"
@@ -37,8 +38,8 @@ const Home = () => {
                 backgroundColor: "#F6F5F2",
               }}
             >
-              <h3 className="mb-4"> Experience</h3>
-              <Experience />
+              <h3 className="mb-4"> Projects</h3>
+              <Projects />
             </div>
           </div>
         </div>

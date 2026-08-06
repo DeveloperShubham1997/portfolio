@@ -10,39 +10,41 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      artifact-path: ${{ steps.upload-artifact.outputs.artifact-path }}
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 18
+          cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
 
-      - name: Build
-        run: npm run build
+      - run: npm run build
 
-      - name: Show build folder (debug)
-        run: ls -la ./build || ls -la ./dist || ls -la ./out || true
-
-      - name: Upload Pages artifact
-        id: upload-artifact
-        uses: actions/upload-pages-artifact@v1
+      - uses: actions/upload-pages-artifact@v3
         with:
-          # Change path to ./dist or ./out if your build outputs there
-          path: ./build
+          path: ./build   # Change to ./dist if you're using Vite
 
   deploy:
     needs: build
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+      - id: deployment
+        uses: actions/deploy-pages@v4
